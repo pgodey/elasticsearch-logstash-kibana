@@ -7,5 +7,6 @@ COPY /usr/share/logstash/pipeline ./pipeline
 COPY /usr/share/logstash/templates ./templates
 
 EXPOSE 5044
+EXPOSE 9600
 
 CMD [ "logstash", "-f", "/usr/share/logstash/pipeline/logstash-r1.conf" ]
