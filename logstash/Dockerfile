@@ -1,15 +1,11 @@
-FROM logstash:7.8.0
+FROM docker.elastic.co/logstash/logstash:7.5.0
 
 ENV discovery.seed_hosts=logstash
 ENV LS_JAVA_OPTS="-Xms512m -Xmx512m"
 
-WORKDIR /logstash
+COPY /usr/share/logstash/pipeline ./pipeline
+COPY /usr/share/logstash/templates ./templates
 
-COPY nginx.log ./
-COPY /pipeline ./pipeline
-
-EXPOSE 5000
 EXPOSE 5044
-EXPOSE 9600
 
-CMD [ "logstash", "-f", "pipeline/logstash-nginx.config" ]
+CMD [ "logstash", "-f", "/usr/share/logstash/pipeline/logstash-r1.conf" ]
